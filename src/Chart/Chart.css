@@ -1,0 +1,22 @@
+.chart {
+  height: 60vh;
+  width: 100%;
+}
+
+.custom-tooltip {
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  height: 50%;
+  width: 100%;
+  margin: 0;
+  padding: 0rem 0.5rem 1.5rem 0.5rem;
+  justify-content: center;
+  align-items: center;
+}
+.custom-tooltip p {
+  height: 0.2rem;
+}
+.custom-tooltip > .yearr {
+  font-weight: 800;
+}/*# sourceMappingURL=Chart.css.map */

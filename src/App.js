@@ -1,23 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import Landing from "./Landing/Landing";
+import "./App.css";
+import { useEffect, useState } from "react";
+import Chart from "./Chart/Chart";
 
 function App() {
+  const [animeData, setAnimeData] = useState([]);
+  const [graphData, setGraphData] = useState([]);
+
+  const getData = async () => {
+    const res = await fetch(`https://api.jikan.moe/v4/top/anime?limit=20`);
+    const resData = await res.json();
+    setAnimeData(resData.data);
+  };
+  useEffect(() => {
+    getData();
+  }, []);
+  useEffect(() => {
+    let arr = [];
+    animeData.map((m, i) => {
+      arr.push({ date: m.aired.prop.from.year, name: m.title });
+    });
+    setGraphData(arr);
+  }, [animeData]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Landing data={animeData} />
+      {graphData && <Chart data={graphData} />}
     </div>
   );
 }
